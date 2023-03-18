@@ -111,7 +111,7 @@ public class Board {
                 current = printSnakesAndLaddersBoardRow(current, column);
                 printSnakesAndLadders(current, row - 1, column);
             } else {
-                current = printSnakesAndLaddersRowInvested(current, column);
+                current = printSnakesAndLaddersRowInverted(current, column);
                 printSnakesAndLadders(current, row - 1, column);
             }
         }
@@ -137,11 +137,11 @@ public class Board {
         return last;
     }
 
-    private Box printSnakesAndLaddersRowInvested(Box current, int columnCount) {
+    private Box printSnakesAndLaddersRowInverted(Box current, int columnCount) {
         Box last = null;
         String message = "";
         if (current != null && columnCount > 0) {
-            last = printSnakesAndLaddersRowInvested(current.getPrevious(), columnCount - 1);
+            last = printSnakesAndLaddersRowInverted(current.getPrevious(), columnCount - 1);
             if (current.getSnake() != null && current.getStair() == null) {
                 message = " [" + current.getSnake().getName() + "]";
             } else if (current.getStair() != null && current.getSnake() == null) {
