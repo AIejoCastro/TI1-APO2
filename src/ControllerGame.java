@@ -144,8 +144,17 @@ public class ControllerGame {
         int moving = 0;
         Box box;
         String playerName = player.getName();
+        /**
+         * Realiza una serie de operaciones según el nombre del jugador proporcionado.
+         * Si el nombre del jugador es "*", el jugador mueve una cantidad de casillas especificada por el valor de la variable "positionsToMove".
+         * Si el jugador cae en una casilla con una serpiente o una escalera, se mueve automáticamente a la casilla de destino correspondiente.
+         * Si el jugador llega al final del tablero, se establece su puntaje utilizando el método playerScore y se inserta su puntuación en el árbol de puntajes.
+         * @param playerName el nombre del jugador
+         * @return verdadero si el jugador ha llegado al final del tablero y se ha establecido su puntaje, falso en caso contrario
+         */
         switch (playerName) {
             case "*":
+                /**Inicia el recorrido para calcular el puntaje de el jugador de el jugador*/
                 long inicio=player.getStartScore();
                 moving = player.getPosition() + positionsToMove;
                 if (searchBox(moving).getSnake() != null) {
@@ -162,17 +171,18 @@ public class ControllerGame {
                 box.setPlayer1(null);
                 if (moving >= board.getEnd().getNumberOfBox()) {
                     board.getEnd().setPlayer1(player);
+                    /**Saca el momento en el que el jugador llega al final de la casilla y lo resta con el tiempo de inio*/
                     long fin=System.currentTimeMillis();
+                    /**la duracion es el valor que se le pasa a la clase BSTScore*/
                     double duracion =  ((fin - inicio)/1000.0);
-                    /* la puntuación de un jugador en un juego, y lo hace de la siguiente manera:Llama al método playerScore(duracion) con un argumento duracion, que probablemente es la duración del juego en segundos.
-                    Toma el resultado devuelto por el método playerScore y lo convierte a una cadena usando el método String.valueOf.
-                    Toma la cadena resultante y la convierte a un entero utilizando el método Integer.parseInt.
-                    Establece la puntuación del jugador utilizando el valor entero resultante de la conversión, usando el método setScore en el objeto player.
-                    Por lo tanto, en resumen, la línea de código establece la puntuación del jugador en el juego usando la puntuación calculada por el método playerScore para la duración del juego proporcionada.*/
+            /* la puntuación de un jugador en un juego, y lo hace de la siguiente manera:Llama al método playerScore(duracion) con un argumento duracion, que probablemente es la duración del juego en segundos.
+            Toma el resultado devuelto por el método playerScore y lo convierte a una cadena usando el método String.valueOf.
+            Toma la cadena resultante y la convierte a un entero utilizando el método Integer.parseInt.
+            Establece la puntuación del jugador utilizando el valor entero resultante de la conversión, usando el método setScore en el objeto player.
+            Por lo tanto, en resumen, la línea de código establece la puntuación del jugador en el juego usando la puntuación calculada por el método playerScore para la duración del juego proporcionada.*/
                     player.setScore(Integer.parseInt(String.valueOf(score.playerScore(duracion))));
                     double scoreFinal= score.playerScore(duracion);
                     Node node1 = new Node(scoreFinal,playerName);
-
                     bst.insert(node1);
                     return true;
                 }
@@ -180,6 +190,7 @@ public class ControllerGame {
                 box.setPlayer1(player);
                 player.setPosition(moving);
                 break;
+
             case "!":
                 long inicio2=player.getStartScore();
                 moving = player.getPosition() + positionsToMove;

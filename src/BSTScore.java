@@ -2,6 +2,8 @@ public class BSTScore {
 
     private Node root;
 
+    /**Bst sacado de el GitHub de el profesor domiciano rendom*/
+
     public BSTScore() { }
     public int size() {
         return size(root);

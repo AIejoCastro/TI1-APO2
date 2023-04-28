@@ -1,6 +1,16 @@
-public class Score  {
-    Player player;
-    BSTScore bstScore;
+/**
+ * La clase Score representa el puntaje de un jugador.
+ */
+public class Score {
+    Player player; // Objeto jugador
+    BSTScore bstScore; // Objeto árbol de puntajes
+
+    /**
+     * Calcula el puntaje del jugador utilizando la fórmula (600 - t) / 6.0.
+     * Si el puntaje es negativo, se establece en cero.
+     * @param t el tiempo en segundos que tardó el jugador en completar la tarea
+     * @return el puntaje del jugador como un valor entero
+     */
     public int playerScore(double t){
 
         double puntaje = (600 - t) / 6.0; // Calcula el puntaje usando la fórmula
@@ -12,12 +22,5 @@ public class Score  {
 
         return (int) puntaje;
     }
-
-    /**
-     * metodo utilizado para imprimir el puntaje  de los jugadores haciendo un bucle hasta que imprima
-     * todos los puntajes
-     * @param player
-     */
-
 
 }

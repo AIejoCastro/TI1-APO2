@@ -1,5 +1,7 @@
 public class Node {
-
+/**
+ * Clase Nodo sacada de el git hub de el profesor domiciano
+ * */
     private double value;
     private String namePlayer;
 
